@@ -1,0 +1,39 @@
+.body {
+  display: flex;
+  gap: 15px;
+}
+
+.main {
+  display: flex;
+
+  min-height: 100vh;
+}
+
+.content {
+  width: 74%;
+  background-color: #364fc7;
+  color: aliceblue;
+  position: relative;
+}
+
+.description {
+  margin: 65px 0px 0px 50px;
+  width: 50%;
+}
+
+.description h3 {
+  font-size: 32px;
+  line-height: 1.4;
+}
+
+.description p {
+  font-size: 18px;
+  line-height: 1.6;
+  letter-spacing: 1px;
+}
+
+.image {
+  position: absolute;
+  bottom: 0;
+  right: 5%;
+}
