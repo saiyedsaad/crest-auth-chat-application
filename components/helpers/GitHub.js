@@ -1,8 +1,13 @@
 import Image from "next/image";
+import { signIn } from "next-auth/react";
 
 const GitHub = () => {
+  const handleGitHubSignIn = async () => {
+    signIn("github", { callbackUrl: "http://localhost:3000" });
+  };
+
   return (
-    <button>
+    <button onClick={handleGitHubSignIn}>
       <div>
         <Image
           src="/assets/icons/github.png"
