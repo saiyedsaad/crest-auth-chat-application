@@ -1,8 +1,8 @@
 import Google from "./Google";
 import Facebook from "./Facebook";
 import GitHub from "./GitHub";
-import LinkedIn from "./LinkedIn";
 import classes from "./Providers.module.css";
+import Twitter from "./Twitter";
 
 const Providers = () => {
   return (
@@ -10,7 +10,7 @@ const Providers = () => {
       <Google />
       <Facebook />
       <GitHub />
-      <LinkedIn />
+      <Twitter />
     </div>
   );
 };

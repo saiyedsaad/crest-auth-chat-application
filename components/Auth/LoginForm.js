@@ -3,10 +3,23 @@ import Providers from "../helpers/Providers";
 import classes from "./LoginForm.module.css";
 import loginValidation from "../../lib/validate";
 import { useFormik } from "formik";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/router";
 
 const LoginForm = () => {
+  const router = useRouter();
+
   const submitHandler = async (values) => {
-    console.log(values);
+    const status = await signIn("credentials", {
+      redirect: false,
+      email: values.email,
+      password: values.password,
+      callbackUrl: "/",
+    });
+
+    if (status.ok) {
+      router.push(status.url);
+    }
   };
 
   const formik = useFormik({
@@ -20,10 +33,12 @@ const LoginForm = () => {
 
   return (
     <div className={classes.loginForm}>
-      <form onSubmit={formik.handleSubmit} type="submit">
+      <div className={classes.header}>
         <div className={classes.logo}>CREST AUTH</div>
         <h2>Log Into Your Account</h2>
         <Providers />
+      </div>
+      <form onSubmit={formik.handleSubmit}>
         <div className={classes.options}>
           <span>OR</span>
         </div>

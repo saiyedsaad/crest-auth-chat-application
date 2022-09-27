@@ -2,10 +2,31 @@ import Link from "next/link";
 import { useFormik } from "formik";
 import { registerValidation } from "../../lib/validate";
 import classes from "./RegisterForm.module.css";
+import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
 
 const RegisterForm = () => {
+  const router = useRouter();
+
   const submitHandler = async (values) => {
-    console.log(values);
+    const fetchOptions = {
+      method: "POST",
+      body: JSON.stringify(values),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    const response = await fetch(
+      "http://localhost:3000/api/auth/signup",
+      fetchOptions
+    );
+
+    const responseData = await response.json();
+
+    if (responseData) {
+      router.push("http://localhost:3000/login");
+    }
   };
 
   const formik = useFormik({

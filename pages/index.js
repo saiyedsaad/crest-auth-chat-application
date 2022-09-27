@@ -1,8 +1,8 @@
 import { Fragment } from "react";
 import Head from "next/head";
 import Link from "next/link";
-import classes from "../styles/Home.module.css";
 import { useSession, getSession, signOut } from "next-auth/react";
+import classes from "../styles/Home.module.css";
 
 const HomePage = () => {
   const { data: session } = useSession();
@@ -39,6 +39,8 @@ const Guest = () => {
 
 // AUTHORIZED USER HOME PAGE
 const User = ({ session, signOutHandler }) => {
+  const imageURL = session.user.image;
+
   return (
     <main className={classes.container}>
       <h2>Authorized User Home Page</h2>
@@ -48,12 +50,19 @@ const User = ({ session, signOutHandler }) => {
         <h5>{session.user.email}</h5>
       </div>
 
+      <div>
+        <img
+          className={classes.image}
+          src={imageURL ? imageURL : "/assets/profile.jpg"}
+          alt="Profile Picture"
+        />
+      </div>
+
       <div className={classes.goTo}>
         <button className={classes.btn} onClick={signOutHandler}>
           Sign Out
         </button>
       </div>
-
       <div className={classes.goTo}>
         <Link href="/profile">
           <a className={classes.link}>Profile</a>
@@ -67,7 +76,6 @@ export default HomePage;
 
 export async function getServerSideProps({ req }) {
   const session = await getSession({ req });
-
   if (!session) {
     return {
       redirect: {

@@ -3,10 +3,8 @@
   color: #222;
 }
 
-.loginForm {
-  display: flex;
-  flex-direction: column;
-  padding-left: 0px;
+.loginForm .header {
+  margin: 10px 0px 50px 30px;
 }
 
 .loginForm form {
